@@ -30,9 +30,11 @@ services:
     environment:
       GF_SECURITY_ADMIN_USER: ${GRAFANA_USERNAME}
       GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD}
+      INFLUXDB_TOKEN: ${INFLUXDB_TOKEN}
 
     volumes:
       - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning:ro
 
     depends_on:
       - influxdb
