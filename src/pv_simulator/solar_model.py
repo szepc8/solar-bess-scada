@@ -1,7 +1,7 @@
 import pandas as pd
 import pvlib
 
-from config import PVConfig
+from pv_simulator.config import PVConfig
 
 
 class SolarModel:

@@ -1,9 +1,9 @@
 import pandas as pd
-from weather_model import WeatherModel
+from pv_simulator.weather_model import WeatherModel
 
-from config import PVConfig
-from solar_model import SolarModel
-from simulator import PVSimulator
+from pv_simulator.config import PVConfig
+from pv_simulator.solar_model import SolarModel
+from pv_simulator.simulator import PVSimulator
 
 
 class PVGeneration:
