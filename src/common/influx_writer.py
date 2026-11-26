@@ -87,5 +87,44 @@ class InfluxWriter:
             record=point
         )
 
+
+    def write_bess_measurement(self, telemetry: dict):
+        """
+        Write AlphaESS BESS telemetry to InfluxDB.
+        """
+
+        point = (
+            Point("bess")
+            .tag("device", "alphaess_simulator")
+            .tag("location", "brasov")
+            .field("soc", float(telemetry["soc"]))
+            .field("soh", float(telemetry["soh"]))
+            .field("power_kw", float(telemetry["power_kw"]))
+            .field("voltage_v", float(telemetry["voltage_v"]))
+            .field("current_a", float(telemetry["current_a"]))
+            .field(
+                "temperature_c",
+                float(telemetry["temperature_c"])
+            )
+            .field("mode", str(telemetry["mode"]))
+            .field(
+                "energy_charged_kwh",
+                float(telemetry["energy_charged_kwh"])
+            )
+            .field(
+                "energy_discharged_kwh",
+                float(telemetry["energy_discharged_kwh"])
+            )
+            .time(
+                telemetry["timestamp"],
+                WritePrecision.NS
+            )
+        )
+
+        self.write_api.write(
+            bucket=self.bucket,
+            org=self.org,
+            record=point
+        )
     def close(self):
         self.client.close()
